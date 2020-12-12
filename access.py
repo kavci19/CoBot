@@ -1,7 +1,5 @@
 # GS Quant documentation available at:
 # https://developer.gs.com/docs/gsquant/guides/getting-started/
-import os
-from flask import Flask, g, render_template, redirect, request, jsonify, session
 import db
 import datetime
 from datetime import date
@@ -19,39 +17,12 @@ for index, row in countries.iterrows():
     country_id_name_dict[row['countryId']] = row['countryName']
 
 
-def create_app(test_config=None):
-    # create and configure the app
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-        SECRET_KEY='co-bot-is-the-best',
-    )
-
-    app.register_blueprint(auth.bp)
-
-    db.init_app(app)
-
-    if test_config is None:
-        app.config.from_pyfile('config.py', silent=True)
-    else:
-        app.config.from_mapping(test_config)
-
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
-
-    return app
-
-
-app = create_app()
-
-
 def get_new_daily_record_confirmed():
     return_countries = []
     country_ids = list(country_id_name_dict.keys())
-    for country in country_ids[0:20]:
+    for country in country_ids:
         highest_confirmed = ds.get_data(datetime.date(2020, 1, 21), countryId=[country])['newConfirmed'].max()
-        today_confirmed = ds.get_data(today, countryId=[country])[['newConfirmed']]
+        today_confirmed = ds.get_data(datetime.date(2020, 12, 11), countryId=[country])[['newConfirmed']]
         if highest_confirmed == today_confirmed['newConfirmed'].values[0]:
             return_countries.append(country_id_name_dict[country])
     if len(return_countries) == 0:
@@ -66,7 +37,7 @@ def get_new_daily_record_confirmed():
 def get_new_daily_record_fatalities():
     return_countries = []
     country_ids = list(country_id_name_dict.keys())
-    for country in country_ids[0:20]:
+    for country in country_ids:
         highest_fatalities = ds.get_data(datetime.date(2020, 1, 21), countryId=[country])['newFatalities'].max()
         today_fatalities= ds.get_data(today, countryId=[country])[['newFatalities']]
         if highest_fatalities == today_fatalities['newFatalities'].values[0]:
