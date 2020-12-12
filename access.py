@@ -3,6 +3,10 @@
 import db
 import datetime
 from datetime import date
+import json
+import os
+import smtplib
+from email.message import EmailMessage
 
 from gs_quant.data import Dataset
 from gs_quant.session import GsSession, Environment
@@ -15,6 +19,50 @@ countries = ds.get_data(today)[['countryName', 'countryId']].drop_duplicates()
 country_id_name_dict = {}
 for index, row in countries.iterrows():
     country_id_name_dict[row['countryId']] = row['countryName']
+
+
+def get_country_with_largest_total_deaths(data):
+    jsonified_data = json.loads(data.to_json(orient="table"))["data"]
+    max_total_deaths = float("-inf")
+    country_info = None
+    for entry in jsonified_data:
+        current_total_fatalities = entry["totalFatalities"]
+        if current_total_fatalities >= max_total_deaths:
+            max_total_deaths = current_total_fatalities
+            country_info = entry
+    country_name = country_info['countryName']
+    print(f"{country_name} is the country with the most total deaths.\nTotal deaths: {max_total_deaths}")
+    return f"{country_name} is the country with the most total deaths.\nTotal deaths: {max_total_deaths}\n"
+
+
+def get_country_with_largest_total_confirmed_cases(data):
+    jsonified_data = json.loads(data.to_json(orient="table"))["data"]
+    max_confirmed_cases = float("-inf")
+    country_info = None
+    for entry in jsonified_data:
+        current_confirmed_cases = entry["totalConfirmed"]
+        if current_confirmed_cases >= max_confirmed_cases:
+            max_confirmed_cases = current_confirmed_cases
+            country_info = entry
+    country_name = country_info['countryName']
+    print(f"{country_name} is the country with the most confirmed cases\nconfirmed cases: {max_confirmed_cases}")
+    return f"{country_name} is the country with the most confirmed cases\nconfirmed cases: {max_confirmed_cases}\n"
+
+
+def create_email_string():
+    email_string = ""
+    email_string += get_country_with_largest_total_deaths(data)
+    email_string += get_country_with_largest_total_confirmed_cases(data)
+    return email_string
+
+
+def send_client_email(email_string, decision_table):
+    EMAIL_ADDRESS = "cothecovidbot@gmail.com"
+    EMAIL_PASSWORD = "OpenPassword123"
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+    server.sendmail(EMAIL_ADDRESS, "OTHEREMAIL.com", email_string)
+    server.quit()
 
 
 def get_new_daily_record_confirmed():
@@ -65,3 +113,9 @@ def get_top_5_daily_new_fatalities():
     return_countries = [country_id_name_dict[country] for country in new_fatalities['countryId'].values]
     message = '''The top 5 countries who have the highest number of new death cases today are: ''' + ', '.join(return_countries) + '.'
     return message
+
+
+test_data = ds.get_data(datetime.date(2020, 1, 21), limit=1)
+get_country_with_largest_total_confirmed_cases(test_data)
+send_client_email(create_email_string(), [{'email': 'cothecovidbot@gmail.com', 'record_confirmed': False, 'record_fatalities': True, 'top_5_most_confirmed': False, 'top_5_most_fatalities': False,
+                                           'population_pct': False, 'top_5_least_confirmed': False, 'top_5_least_fatalities': True, 'total_fatalities_highest': False, 'total_confirmed_highest': False, 'notification_time': None}])
