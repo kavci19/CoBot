@@ -50,19 +50,19 @@ def get_country_with_largest_total_confirmed_cases(data):
     return f"{country_name} is the country with the most confirmed cases\nconfirmed cases: {max_confirmed_cases}\n"
 
 
-def create_email_string():
+def create_email_string(test_data):
     email_string = ""
-    email_string += get_country_with_largest_total_deaths(data)
-    email_string += get_country_with_largest_total_confirmed_cases(data)
+    email_string += get_country_with_largest_total_deaths(test_data)
+    email_string += get_country_with_largest_total_confirmed_cases(test_data)
     return email_string
 
 
 def send_client_email(email_string, decision_table):
-    EMAIL_ADDRESS = "cothecovidbot@gmail.com"
-    EMAIL_PASSWORD = "OpenPassword123"
+    EMAIL_ADDRESS = "cothebot@gmail.com"
+    EMAIL_PASSWORD = "HiImCo!!"
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-    server.sendmail(EMAIL_ADDRESS, "OTHEREMAIL.com", email_string)
+    server.sendmail(EMAIL_ADDRESS, "cothebot@gmail.com", email_string)
     server.quit()
 
 
@@ -183,5 +183,5 @@ def get_daily_new(N, queryType, region=None, order='least'):
 
 test_data = ds.get_data(datetime.date(2020, 1, 21), limit=1)
 get_country_with_largest_total_confirmed_cases(test_data)
-send_client_email(create_email_string(), [{'email': 'cothecovidbot@gmail.com', 'record_confirmed': False, 'record_fatalities': True, 'top_5_most_confirmed': False, 'top_5_most_fatalities': False,
+send_client_email(create_email_string(test_data), [{'email': 'cothebot@gmail.com', 'record_confirmed': False, 'record_fatalities': True, 'top_5_most_confirmed': False, 'top_5_most_fatalities': False,
                                            'population_pct': False, 'top_5_least_confirmed': False, 'top_5_least_fatalities': True, 'total_fatalities_highest': False, 'total_confirmed_highest': False, 'notification_time': None}])
