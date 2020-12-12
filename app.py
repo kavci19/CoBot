@@ -31,14 +31,13 @@ def register():
         record_fatalities = request.form.get("record_fatalities") != None
         top_5_most_confirmed = request.form.get("top_5_most_confirmed") != None
         top_5_most_fatalities = request.form.get("top_5_most_fatalities") != None
-        population_pct = request.form.get("population_pct") != None
         top_5_least_confirmed = request.form.get("top_5_least_confirmed") != None
         top_5_least_fatalities = request.form.get("top_5_least_fatalities") != None
         total_fatalities_highest = request.form.get("total_fatalities_highest") != None
         total_confirmed_highest = request.form.get("total_confirmed_highest") != None
         error = db.register_user(email, record_confirmed, record_fatalities,
         top_5_most_confirmed, top_5_most_fatalities,
-        population_pct, top_5_least_confirmed, top_5_least_fatalities,
+        top_5_least_confirmed, top_5_least_fatalities,
         total_fatalities_highest, total_confirmed_highest, None)
         if error is None:
             return redirect('/landing')
