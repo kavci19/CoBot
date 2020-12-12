@@ -35,9 +35,9 @@ def init_app(app):
 
 
 def register_user(email, record_confirmed, record_fatalities,
-top_5_most_confirmed, top_5_most_fatalities, population_pct,
-top_5_least_confirmed, top_5_least_fatalities,
-total_fatalities_highest, total_confirmed_highest, notification_time):
+    top_5_most_confirmed, top_5_most_fatalities, population_pct,
+    top_5_least_confirmed, top_5_least_fatalities,
+    total_fatalities_highest, total_confirmed_highest, notification_time):
     try:
         conn = get_db_conn()
         cur = conn.cursor()
@@ -69,19 +69,19 @@ def get_users():
             return [], None
         user_list = []
         for row in rows:
-            item_list.append({
+            user_list.append({
                     'email': row[0],
-                    record_confirmed: row[1],
-                    record_fatalities: row[2],
-                    top_5_most_confirmed: row[3],
-                    top_5_most_fatalities: row[4],
-                    population_pct: row[5],
-                    top_5_least_confirmed: row[6],
-                    top_5_least_fatalities: row[7],
-                    total_fatalities_highest: row[8],
-                    total_confirmed_highest: row[9],
-                    notification_time: row[10],
+                    'record_confirmed': row[1] == 1,
+                    'record_fatalities': row[2] == 1,
+                    'top_5_most_confirmed': row[3] == 1,
+                    'top_5_most_fatalities': row[4] == 1,
+                    'population_pct': row[5] == 1,
+                    'top_5_least_confirmed': row[6] == 1,
+                    'top_5_least_fatalities': row[7] == 1,
+                    'total_fatalities_highest': row[8] == 1,
+                    'total_confirmed_highest': row[9] == 1,
+                    'notification_time': row[10],
             })
-        return item_list, None
+        return user_list, None
     except pymysql.Error as e:
         return None, e
