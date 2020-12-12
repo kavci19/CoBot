@@ -7,6 +7,7 @@ import json
 import os
 import smtplib
 from email.message import EmailMessage
+import heapq
 
 from gs_quant.data import Dataset
 from gs_quant.session import GsSession, Environment
@@ -50,20 +51,20 @@ def get_country_with_largest_total_confirmed_cases(data):
 
 test_data = ds.get_data(datetime.date(2020, 1, 21), limit=1)
 
-def create_email_string():
+def create_email_string(test_data):
     email_string = ""
     email_string += get_country_with_largest_total_deaths(test_data)
     email_string += get_country_with_largest_total_confirmed_cases(test_data)
     return email_string
 
 
-# def send_client_email(email_string, decision_table):
-#     EMAIL_ADDRESS = "cothecovidbot@gmail.com"
-#     EMAIL_PASSWORD = "OpenPassword123"
-#     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-#     server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-#     server.sendmail(EMAIL_ADDRESS, "OTHEREMAIL.com", email_string)
-#     server.quit()
+def send_client_email(email_string, decision_table):
+    EMAIL_ADDRESS = "cothebot@gmail.com"
+    EMAIL_PASSWORD = "HiImCo!!"
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+    server.sendmail(EMAIL_ADDRESS, "cothebot@gmail.com", email_string)
+    server.quit()
 
 
 def get_new_daily_record_confirmed():
@@ -116,6 +117,78 @@ def get_top_5_daily_new_fatalities():
     return message
 
 
+<<<<<<< HEAD
 # get_country_with_largest_total_confirmed_cases(test_data)
 # send_client_email(create_email_string(), [{'email': 'cothecovidbot@gmail.com', 'record_confirmed': False, 'record_fatalities': True, 'top_5_most_confirmed': False, 'top_5_most_fatalities': False,
 #                                            'population_pct': False, 'top_5_least_confirmed': False, 'top_5_least_fatalities': True, 'total_fatalities_highest': False, 'total_confirmed_highest': False, 'notification_time': None}])
+=======
+# functionality: computes the countries with the most/least amount of daily new deaths/infected in a given region (if
+# supplied)
+# N = amount of countries to be returned
+# queryType = newConfirmed or newFatalities
+# region = region of the world to query (Americas, Southeast Asia, etc.)
+# order = least or greatest
+
+def get_daily_new(N, queryType, region=None, order='least'):
+
+    region_to_key = {'Americas': 'AMRO',
+                     'Eastern Mediterranean': 'EMRO',
+                     'Western Pacific': 'WPRO',
+                     'Southeast Asia': 'SEARO'}
+
+    date = str(datetime.datetime.now()).split()[0].split('-')
+
+    ds = Dataset('COVID19_COUNTRY_DAILY_WHO')
+
+    if order == 'least':
+        multiplier = -1
+    else:
+        multiplier = 1
+
+    if region:
+        if region not in region_to_key:
+            regionId = 'Other'
+        else:
+            regionId = region_to_key[region]
+
+    if region is None:
+        data = ds.get_data(datetime.date(int(date[0]), int(date[1]), int(date[2])), limit=2)
+    else:
+        data = ds.get_data(datetime.date(int(date[0]), int(date[1]), int(date[2])), regionName=regionId, limit=2)
+
+    cases = data[queryType]
+    country = data['countryName']
+
+    heap = []
+
+    for i in range(len(cases)):
+        heapq.heappush(heap, (multiplier * cases[i], country[i]))
+        if len(heap) > N:
+            heapq.heappop(heap)
+
+    heap.sort(key=lambda x: x[0])
+
+    if queryType == 'newConfirmed':
+        word = 'cases'
+    else:
+        word = 'deaths'
+
+    regionWord = ''
+    if region is not None:
+        regionWord = ' in ' + region
+
+    result = 'The ' + str(N) + ' countries with the ' + order + ' daily new ' + word + regionWord + ' are:\n'
+
+    for entry in heap:
+        result += str(entry[1]) + ': ' + str(int(abs(entry[0]))) + '\n'
+
+    return result
+
+
+
+
+test_data = ds.get_data(datetime.date(2020, 1, 21), limit=1)
+get_country_with_largest_total_confirmed_cases(test_data)
+send_client_email(create_email_string(test_data), [{'email': 'cothebot@gmail.com', 'record_confirmed': False, 'record_fatalities': True, 'top_5_most_confirmed': False, 'top_5_most_fatalities': False,
+                                           'population_pct': False, 'top_5_least_confirmed': False, 'top_5_least_fatalities': True, 'total_fatalities_highest': False, 'total_confirmed_highest': False, 'notification_time': None}])
+>>>>>>> d9bbab73a3dd4af40078cd77811f3b2a5e86bc65
