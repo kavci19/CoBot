@@ -117,11 +117,6 @@ def get_top_5_daily_new_fatalities():
     return message
 
 
-<<<<<<< HEAD
-# get_country_with_largest_total_confirmed_cases(test_data)
-# send_client_email(create_email_string(), [{'email': 'cothecovidbot@gmail.com', 'record_confirmed': False, 'record_fatalities': True, 'top_5_most_confirmed': False, 'top_5_most_fatalities': False,
-#                                            'population_pct': False, 'top_5_least_confirmed': False, 'top_5_least_fatalities': True, 'total_fatalities_highest': False, 'total_confirmed_highest': False, 'notification_time': None}])
-=======
 # functionality: computes the countries with the most/least amount of daily new deaths/infected in a given region (if
 # supplied)
 # N = amount of countries to be returned
@@ -184,11 +179,5 @@ def get_daily_new(N, queryType, region=None, order='least'):
 
     return result
 
-
-
-
-test_data = ds.get_data(datetime.date(2020, 1, 21), limit=1)
-get_country_with_largest_total_confirmed_cases(test_data)
 send_client_email(create_email_string(test_data), [{'email': 'cothebot@gmail.com', 'record_confirmed': False, 'record_fatalities': True, 'top_5_most_confirmed': False, 'top_5_most_fatalities': False,
                                            'population_pct': False, 'top_5_least_confirmed': False, 'top_5_least_fatalities': True, 'total_fatalities_highest': False, 'total_confirmed_highest': False, 'notification_time': None}])
->>>>>>> d9bbab73a3dd4af40078cd77811f3b2a5e86bc65
