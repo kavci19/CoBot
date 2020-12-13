@@ -5,7 +5,7 @@ from datetime import date
 import smtplib
 import yagmail
 from gs_quant.session import GsSession, Environment
-from pretty_html_table import build_table
+import pandas as pd
 
 GsSession.use(Environment.PROD, 'b16a94fab7714a61b29065f6d6bda51b', '2179ad8fec38bbe8995f4d07293f9b476476dbef67b99f3a4074099de3fff049', ('read_product_data',))
 EMAIL_ADDRESS = "cothebot@gmail.com"
@@ -92,6 +92,7 @@ def create_emails():
             info_string.append(total_confirmed_highest)
             info_string.append('\n')
         info_string.append('Stay safe and healthy!')
+        info_string.append(yagmail.inline('co1.png'))
         yag.send(email, 'Daily COVID-19 Report by Co', info_string)
 
 create_emails()

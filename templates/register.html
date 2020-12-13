@@ -1,4 +1,5 @@
 <!doctype html>
+
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -10,7 +11,7 @@
 
         body {
             font-family: "Poppins", sans-serif;
-            height: 100vh;
+            /* height: 100vh; */
         }
 
         a {
@@ -21,13 +22,15 @@
         }
 
         h2 {
-            text-align: center;
-            font-size: 16px;
+
             font-weight: 600;
             text-transform: uppercase;
             display: inline-block;
-            margin: 40px 8px 10px 8px;
-            color: #cccccc;
+            margin: 10px 8px 10px 8px;
+            color: #56baed;
+            font-family: 'Nixie One', serif;
+            font-size: 3em;
+            text-align: center;
         }
 
 
@@ -40,22 +43,119 @@
             justify-content: center;
             width: 100%;
             min-height: 100%;
+            height: 100%;
             padding: 20px;
         }
 
-        #formContent {
+        /* 
+        
+        #headerForFormContent {
             -webkit-border-radius: 10px 10px 10px 10px;
             border-radius: 10px 10px 10px 10px;
             background: #fff;
-            padding: 30px;
+            margin-top: 50px;
+
             width: 90%;
-            max-width: 450px;
+            height: 90%;
+            max-width: 600px;
+            max-height: 300px;
             position: relative;
             padding: 0px;
             -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
             box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
             text-align: center;
+        } */
+
+        #formContainer .pictures-container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            justify-items: center;
+
         }
+
+        /* #formContainer {} */
+
+        #covidImage1 {
+
+            width: 280px;
+            height: 260px;
+            background-image: url("https://hubpng.com/public/uploads/thumbnail//covid-19-cartoon-covid-19-kartun-11585236634t9dfaq8xfx.png");
+            /* background-color: red; */
+
+
+
+        }
+
+
+        #covidImage2 {
+
+            width: 280px;
+            height: 260px;
+            background-image: url("https://hubpng.com/public/uploads/thumbnail//covid-19-cartoon-covid-19-kartun-11585236634t9dfaq8xfx.png");
+            /* background-color: red; */
+
+
+
+        }
+
+        #covidImage3 {
+
+            width: 280px;
+            height: 260px;
+
+            background-image: url("https://hubpng.com/public/uploads/thumbnail//covid-19-cartoon-covid-19-kartun-11585236634t9dfaq8xfx.png");
+            /* background-color: red; */
+
+
+
+        }
+
+
+        /* focusf */
+        #formContent {
+            -webkit-border-radius: 10px 10px 10px 10px;
+            border-radius: 10px 10px 10px 10px;
+            background: #fff;
+            margin-top: 30px;
+
+            width: 100%;
+            margin: auto;
+            max-width: 600px;
+            position: relative;
+            padding: 20px;
+            -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+            text-align: center;
+
+        }
+
+
+        #formContent p {
+
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            color: #10171a;
+            font-family: 'Nixie One', serif;
+            font-size: 1rem;
+            text-align: center;
+            margin: 10px 0px 10px 0px;
+        }
+
+        #mail {
+            border: 3px solid #56baed;
+            margin-bottom: 30px;
+        }
+
+        #mail:hover {
+            border: 3px solid rgb(236, 90, 90);
+        }
+
+
+
 
         #formFooter {
             background-color: #f6f6f6;
@@ -77,10 +177,133 @@
             border-bottom: 2px solid #5fbae9;
         }
 
+        #register-button {
+
+            margin: 40px;
+
+        }
+
+
+
+
+        .boxes {
+            margin: auto;
+            padding: 20px 40px 20px 40px;
+            background: #484848;
+        }
+
+        /*Checkboxes styles*/
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"]+label {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 20px;
+            font: 14px/20px 'Open Sans', Arial, sans-serif;
+            color: #ddd;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        input[type="checkbox"]+label:last-child {
+            margin-bottom: 0;
+        }
+
+        input[type="checkbox"]+label:before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #6cc0e5;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: .6;
+            -webkit-transition: all .12s, border-color .08s;
+            transition: all .12s, border-color .08s;
+        }
+
+        input[type="checkbox"]:checked+label:before {
+            width: 10px;
+            top: -5px;
+            left: 5px;
+            border-radius: 0;
+            opacity: 1;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        /* start*/
+
+        #formContent form .boxes {
+            margin: auto;
+            padding: 20px 40px 20px 40px;
+
+            background: #484848;
+        }
+
+        /*Checkboxes styles*/
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"]+label {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 20px;
+            font: 14px/20px 'Open Sans', Arial, sans-serif;
+            color: #ddd;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        input[type="checkbox"]+label:last-child {
+            margin-bottom: 0;
+        }
+
+        input[type="checkbox"]+label:before {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #6cc0e5;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: .6;
+            -webkit-transition: all .12s, border-color .08s;
+            transition: all .12s, border-color .08s;
+        }
+
+        input[type="checkbox"]:checked+label:before {
+            width: 10px;
+            top: -5px;
+            left: 5px;
+            border-radius: 0;
+            opacity: 1;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        /* end*/
 
         /* FORM TYPOGRAPHY*/
 
-        input[type=button], input[type=submit], input[type=reset] {
+        input[type=button],
+        input[type=submit],
+        input[type=reset] {
             background-color: #56baed;
             border: none;
             color: white;
@@ -102,11 +325,15 @@
             transition: all 0.3s ease-in-out;
         }
 
-        input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+        input[type=button]:hover,
+        input[type=submit]:hover,
+        input[type=reset]:hover {
             background-color: #39ace7;
         }
 
-        input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
+        input[type=button]:active,
+        input[type=submit]:active,
+        input[type=reset]:active {
             -moz-transform: scale(0.95);
             -webkit-transform: scale(0.95);
             -o-transform: scale(0.95);
@@ -184,6 +411,7 @@
                 -webkit-transform: translate3d(0, -100%, 0);
                 transform: translate3d(0, -100%, 0);
             }
+
             100% {
                 opacity: 1;
                 -webkit-transform: none;
@@ -197,6 +425,7 @@
                 -webkit-transform: translate3d(0, -100%, 0);
                 transform: translate3d(0, -100%, 0);
             }
+
             100% {
                 opacity: 1;
                 -webkit-transform: none;
@@ -209,6 +438,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -218,6 +448,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -227,6 +458,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -307,38 +539,60 @@
 </head>
 
 <body>
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-        <!-- Error Message -->
-        {% if error %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
-        {% endif %}
-        <h2>SIGN UP</h2>
-        <p>Please input your email and select the information you want to read about in the daily COVID-19 report. </p>
+    <div class="wrapper fadeInDown">
 
-        <!-- Register Form -->
-        <form method="post" action="/register">
-            <input type="text" id="mail" class="fadeIn second" name="email" placeholder="Email" required><br>
-            <input type="checkbox" id="record_confirmed" name="record_confirmed" value="record_confirmed">
-            <label for="record_confirmed"> Countries that reach a new record of daily confirmed cases</label><br>
-            <input type="checkbox" id="record_fatalities" name="record_fatalities" value="record_fatalities">
-            <label for="record_fatalities"> Countries that reach a new record of daily death cases</label><br>
-            <input type="checkbox" id="top_5_most_confirmed" name="top_5_most_confirmed" value="top_5_most_confirmed">
-            <label for="top_5_most_confirmed"> Top 5 countries that has reported most new confirmed cases</label><br>
-            <input type="checkbox" id="top_5_most_fatalities" name="top_5_most_fatalities" value="top_5_most_fatalities">
-            <label for="top_5_most_fatalities"> Top 5 countries that has reported most new death cases</label><br>
-            <input type="checkbox" id="top_5_least_confirmed" name="top_5_least_confirmed" value="top_5_least_confirmed">
-            <label for="top_5_least_confirmed"> Top 5 countries that has reported least new confirmed cases</label><br>
-            <input type="checkbox" id="top_5_least_fatalities" name="top_5_least_fatalities" value="top_5_least_fatalities">
-            <label for="top_5_least_fatalities"> Top 5 countries that has reported least new death cases</label><br>
-            <input type="checkbox" id="total_fatalities_highest" name="total_fatalities_highest" value="total_fatalities_highest">
-            <label for="total_fatalities_highest"> Country that has the highest total fatalities so far</label><br>
-            <input type="checkbox" id="total_confirmed_highest" name="total_confirmed_highest" value="total_confirmed_highest">
-            <label for="total_confirmed_highest"> Country that has the highest total confirmed cases so far</label><br>
-            <input type="submit" value="Register">
-        </form>
+        <div id=formContainer>
+
+            <div class="pictures-container">
+                <div id=covidImage1></div>
+                <div id=covidImage2></div>
+                <div id=covidImage3></div>
+            </div>
+            <div id="formContent">
+                <!-- Error Message -->
+                {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% endif %}
+                <h2>SIGN UP</h2>
+                <p>Please input your email and select the information you want to read about in the daily COVID-19
+                    report.
+                </p>
+                <!-- Register Form -->
+                <form method="post" action="/register">
+                    <div class="boxes">
+                        <input type="text" id="mail" class="fadeIn second" name="email" placeholder="Email" required>
+                        <input type="checkbox" id="box-1" name="record_confirmed" value="record_confirmed">
+                        <label for="box-1">Countries that reach a new record of daily confirmed
+                            cases</label>
+                        <input type="checkbox" id="box-2" name="record_fatalities" value="record_fatalities">
+                        <label for="box-2">Countries that reach a new record of daily death
+                            cases</label>
+                        <input type="checkbox" id="box-3" name="top_5_most_confirmed" value="top_5_most_confirmed">
+                        <label for="box-3">Top 5 countries that has reported most new confirmed
+                            cases</label>
+                        <input type="checkbox" id="box-4" name="top_5_most_fatalities" value="top_5_most_fatalities">
+                        <label for="box-4">Top 5 countries that has reported most new death
+                            cases</label>
+                        <input type="checkbox" id="box-5" name="top_5_least_confirmed" value="top_5_least_confirmed">
+                        <label for="box-5">Top 5 countries that has reported least new confirmed
+                            cases</label>
+                        <input type="checkbox" id="box-6" name="top_5_least_fatalities" value="top_5_least_fatalities">
+                        <label for="box-6">Top 5 countries that has reported least new death
+                            cases</label>
+                        <input type="checkbox" id="box-7" name="total_fatalities_highest"
+                            value="total_fatalities_highest">
+                        <label for="box-7">Country that has the highest total fatalities so
+                            far</label>
+                        <input type="checkbox" id="box-8" name="total_confirmed_highest"
+                            value="total_confirmed_highest">
+                        <label for="box-8">Country that has the highest total confirmed cases so
+                            far</label>
+                    </div>
+                    <input type="submit" id="register-button" value="Register">
+                </form>
+            </div>
+        </div>
     </div>
-</div>
 </body>
