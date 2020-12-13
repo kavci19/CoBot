@@ -1,6 +1,7 @@
 import db
 import access
 import datetime
+import time
 from datetime import date
 import smtplib
 import yagmail
@@ -95,4 +96,11 @@ def create_emails():
         info_string.append(yagmail.inline('co1.png'))
         yag.send(email, 'Daily COVID-19 Report by Co', info_string)
 
-create_emails()
+
+while True:
+
+    now = datetime.datetime.now()
+    if now.hour == 21 and now.minute == 45:
+        create_emails()
+        
+    time.sleep(30)
